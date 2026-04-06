@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Marketing Studio - PixelBin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6933fa;
+  --primary-dark: #3535f3;
+  --primary-light-1: #e8e8fc;
+  --primary-light-2: #f7f5fc;
+  --primary-light-3: #efe9f8;
+  --bg-surface: #ffffff;
+  --bg-secondary: #fafafa;
+  --heading-text: #34324a;
+  --body-text: #6e6d74;
+  --secondary-text: #5a5a5a;
+  --tertiary-text: #888;
+  --border-subtle: #f0f0f0;
+  --border-secondary: #b5b5b5;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 250px;
+  --card-shadow: 0px 0px 0px 1px rgba(60,42,152,0.02), 0px 1px 1px -0.5px rgba(60,42,152,0.02), 0px 3px 3px -1.5px rgba(60,42,152,0.04), 0px 6px 6px -3px rgba(60,42,152,0.04), 0px 12px 12px -6px rgba(60,42,152,0.04), 0px 24px 32px -12px rgba(60,42,152,0.04);
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Inter Tight', 'Inter', sans-serif;
+  --green: #27AE60;
+  --red: #E74C3C;
+  --orange: #F39C12;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-secondary);
+  color: var(--body-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--heading-text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.logo-diamond {
+  width: 22px; height: 22px;
+  background: var(--primary);
+  transform: rotate(45deg);
+  border-radius: 4px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.logo-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light-1);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-left: 4px;
+}
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--tertiary-text);
+}
+.nav-center .sep { color: #ccc; }
+.nav-center .current { color: var(--heading-text); font-weight: 500; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.credits-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--secondary-text);
+  background: var(--primary-light-2); padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+.credits-badge svg { flex-shrink: 0; }
+.nav-icon-btn {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: none; cursor: pointer;
+  border-radius: 50%; color: var(--secondary-text);
+  transition: background 0.2s;
+}
+.nav-icon-btn:hover { background: var(--border-subtle); }
+.user-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== APP LAYOUT ===== */
+.app-layout {
+  display: flex;
+  height: calc(100vh - 64px);
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+}
+.sidebar-menu { flex: 1; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px;
+  font-size: 14px; font-weight: 500;
+  color: var(--secondary-text);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+}
+.sidebar-item:hover { background: var(--bg-secondary); color: var(--heading-text); }
+.sidebar-item.active {
+  border-left-color: var(--primary);
+  background: var(--primary-light-2);
+  color: var(--primary);
+}
+.sidebar-item.active svg { color: var(--primary); }
+.sidebar-item svg { flex-shrink: 0; color: var(--tertiary-text); }
+.sidebar-item.active svg { color: var(--primary); }
+.sidebar-sep { height: 1px; background: var(--border-subtle); margin: 12px 20px; }
+.sidebar-secondary {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 20px; font-size: 13px; color: var(--tertiary-text);
+  cursor: pointer; border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+.sidebar-secondary:hover { color: var(--secondary-text); background: var(--bg-secondary); }
+.sidebar-secondary svg { flex-shrink: 0; }
+.sidebar-bottom {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+.plan-badge {
+  font-size: 12px; font-weight: 500; color: var(--tertiary-text);
+  background: var(--bg-secondary); padding: 4px 10px;
+  border-radius: var(--radius-pill); display: inline-block; margin-bottom: 8px;
+}
+.btn-upgrade {
+  font-size: 13px; font-weight: 500; color: var(--primary-dark);
+  border: 1.5px solid #6464ff; background: none; cursor: pointer;
+  padding: 6px 16px; border-radius: var(--radius-pill);
+  transition: all 0.2s; display: block; width: 100%; text-align: center;
+}
+.btn-upgrade:hover { background: var(--primary-light-1); }
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-secondary);
+  position: relative;
+}
+.content-view { display: none; }
+.content-view.active { display: block; }
+
+.view-header {
+  padding: 32px 40px 0;
+}
+.view-header h1 {
+  font-family: var(--font-heading);
+  font-size: 24px; font-weight: 700;
+  color: var(--heading-text);
+  margin-bottom: 4px;
+}
+.view-header p {
+  font-size: 14px; color: var(--body-text);
+}
+.view-body { padding: 24px 40px 40px; }
+
+/* ===== COMMON COMPONENTS ===== */
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 16px; font-weight: 600;
+  color: var(--heading-text);
+  margin-bottom: 16px;
+}
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: 13px; font-weight: 500;
+  color: var(--heading-text);
+  margin-bottom: 6px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--heading-text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--primary);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #c0c0c0; }
+.form-textarea { resize: vertical; min-height: 60px; }
+.form-select { cursor: pointer; }
+.form-hint { font-size: 12px; color: var(--tertiary-text); margin-top: 4px; }
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 600;
+  color: #fff;
+  background: var(--primary);
+  border: none; cursor: pointer;
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary:hover { background: #5a28e0; }
+.btn-secondary {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 500;
+  color: var(--primary-dark);
+  border: 1.5px solid #6464ff;
+  background: none; cursor: pointer;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-secondary:hover { background: var(--primary-light-1); }
+.btn-ghost {
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 500;
+  color: var(--secondary-text);
+  background: none; border: none; cursor: pointer;
+  padding: 8px 12px; display: inline-flex; align-items: center; gap: 4px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--heading-text); }
+
+.pill-tag {
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  color: var(--secondary-text);
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.pill-tag:hover { border-color: var(--primary); color: var(--primary); }
+.pill-tag.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.upload-zone {
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--tertiary-text);
+}
+.upload-zone:hover { border-color: var(--primary); color: var(--primary); }
+.upload-zone svg { margin-bottom: 8px; }
+.upload-zone .upload-text { font-size: 13px; }
+
+/* ===== BRAND SETTINGS VIEW ===== */
+.brand-import-row {
+  display: flex; align-items: center; gap: 12px;
+}
+.brand-import-row .form-input { flex: 1; }
+.color-palette-row {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.color-item {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.color-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--border-subtle);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.color-circle:hover { transform: scale(1.1); }
+.color-hex {
+  font-size: 11px; font-weight: 500; color: var(--tertiary-text);
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.color-label { font-size: 11px; color: var(--tertiary-text); }
+.tone-pills, .style-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.product-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.product-upload {
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--tertiary-text);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.product-upload:hover { border-color: var(--primary); color: var(--primary); }
+.font-preview {
+  background: var(--bg-secondary);
+  padding: 16px; border-radius: var(--radius-md);
+  margin-top: 8px;
+}
+.font-preview .heading-preview {
+  font-family: var(--font-heading); font-size: 18px; font-weight: 700;
+  color: var(--heading-text); margin-bottom: 4px;
+}
+.font-preview .body-preview {
+  font-family: var(--font-body); font-size: 14px; color: var(--body-text);
+}
+
+/* ===== GENERATE AD VIEW ===== */
+/* Step Progress Bar */
+.step-bar {
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 40px 0;
+  gap: 0;
+}
+.step-item {
+  display: flex; align-items: center; gap: 0;
+}
+.step-circle {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600;
+  border: 2px solid var(--border-secondary);
+  color: var(--border-secondary);
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.step-circle.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.step-circle.completed {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.step-label {
+  font-size: 11px;
+  color: var(--tertiary-text);
+  margin-top: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+.step-label.active { color: var(--primary); font-weight: 600; }
+.step-label.completed { color: var(--primary); }
+.step-connector {
+  width: 60px; height: 2px;
+  background: var(--border-subtle);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+.step-connector.completed { background: var(--primary); }
+.step-wrapper {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+
+/* Step Content */
+.step-content { display: none; padding: 24px 40px 100px; }
+.step-content.active { display: block; }
+
+/* Bottom Nav */
+.step-bottom-nav {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  padding: 14px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 10;
+}
+
+/* Step 1 - Campaign Brief */
+.two-col { display: flex; gap: 28px; }
+.col-left { flex: 6; }
+.col-right { flex: 4; }
+
+.format-selector {
+  display: flex; gap: 12px; margin-bottom: 20px;
+}
+.format-card {
+  flex: 1;
+  padding: 16px;
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.format-card:hover { border-color: var(--primary); }
+.format-card.active {
+  border-color: var(--primary);
+  background: var(--primary-light-2);
+}
+.format-card svg { margin-bottom: 8px; }
+.format-card .format-name {
+  font-size: 14px; font-weight: 600; color: var(--heading-text);
+  margin-bottom: 2px;
+}
+.format-card .format-desc {
+  font-size: 12px; color: var(--tertiary-text);
+}
+.duration-row { margin-bottom: 16px; }
+
+.platform-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.summary-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--primary-light-1);
+  padding: 20px;
+  position: sticky;
+  top: 24px;
+}
+.summary-card h3 {
+  font-family: var(--font-heading);
+  font-size: 15px; font-weight: 600;
+  color: var(--heading-text);
+  margin-bottom: 12px;
+}
+.summary-item {
+  display: flex; justify-content: space-between;
+  padding: 6px 0; font-size: 13px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.summary-item:last-child { border-bottom: none; }
+.summary-item .label { color: var(--tertiary-text); }
+.summary-item .value { color: var(--heading-text); font-weight: 500; }
+.ai-tip {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, var(--primary-light-2), var(--primary-light-3));
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  color: var(--secondary-text);
+}
+.ai-tip .badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light-1);
+  padding: 2px 6px; border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* Step 2 - Discover */
+.filter-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.discover-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.discover-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  position: relative;
+}
+.discover-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.discover-card.selected { border-color: var(--primary); }
+.discover-card .thumb {
+  width: 100%; height: 160px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.discover-card .thumb .play-icon {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+.discover-card .duration-badge {
+  position: absolute; bottom: 8px; right: 8px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-size: 11px; padding: 2px 6px;
+  border-radius: 4px; z-index: 2;
+}
+.discover-card .hot-badge {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--red); color: #fff;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px;
+  z-index: 2; letter-spacing: 0.5px;
+}
+.discover-card .check-box {
+  position: absolute; top: 8px; right: 8px;
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.3);
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.discover-card.selected .check-box {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.discover-card .card-body { padding: 12px 14px; }
+.discover-card .brand-name { font-size: 11px; color: var(--tertiary-text); margin-bottom: 4px; }
+.discover-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 4px; margin: 8px 0;
+}
+.discover-metrics .metric {
+  text-align: center;
+}
+.discover-metrics .metric .val { font-size: 12px; font-weight: 600; color: var(--heading-text); }
+.discover-metrics .metric .lbl { font-size: 9px; color: var(--tertiary-text); text-transform: uppercase; }
+.format-pill {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 4px;
+  background: var(--primary-light-1);
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.hook-preview {
+  font-size: 12px; color: var(--secondary-text);
+  font-style: italic; margin: 4px 0;
+}
+.remix-time { font-size: 11px; color: var(--tertiary-text); }
+.discover-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 40px;
+}
+
+/* Step 3 - Creative Direction */
+.radio-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.radio-card {
+  padding: 14px;
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  cursor: pointer; transition: all 0.2s;
+  text-align: center;
+}
+.radio-card:hover { border-color: var(--primary); }
+.radio-card.active {
+  border-color: var(--primary);
+  background: var(--primary-light-2);
+}
+.radio-card .rc-icon { font-size: 24px; margin-bottom: 6px; }
+.radio-card .rc-name { font-size: 13px; font-weight: 600; color: var(--heading-text); margin-bottom: 2px; }
+.radio-card .rc-desc { font-size: 11px; color: var(--tertiary-text); }
+.char-count { font-size: 11px; color: var(--tertiary-text); text-align: right; margin-top: 2px; }
+.visual-section { margin-bottom: 16px; }
+.visual-section .section-label { font-size: 13px; font-weight: 500; color: var(--heading-text); margin-bottom: 8px; }
+
+.phone-preview {
+  background: var(--bg-surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--card-shadow);
+  padding: 12px;
+  position: sticky; top: 24px;
+}
+.phone-frame {
+  width: 100%;
+  aspect-ratio: 9/16;
+  max-height: 500px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.phone-frame .preview-logo {
+  position: absolute; top: 16px; left: 16px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-frame .preview-text {
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: #fff;
+}
+.phone-frame .preview-headline {
+  font-family: var(--font-heading);
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.phone-frame .preview-tagline {
+  font-size: 13px; opacity: 0.9;
+  margin-bottom: 10px;
+}
+.phone-frame .preview-cta {
+  display: inline-block;
+  font-size: 12px; font-weight: 600;
+  padding: 6px 16px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-pill);
+}
+.preview-note { font-size: 11px; color: var(--tertiary-text); text-align: center; margin-top: 8px; }
+
+/* Step 4 - Plan Review */
+.plan-toggle {
+  display: flex; gap: 8px; margin-bottom: 20px;
+}
+.plan-toggle-btn {
+  font-size: 13px; font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--secondary-text);
+  cursor: pointer; transition: all 0.2s;
+}
+.plan-toggle-btn.active {
+  background: var(--primary); color: #fff; border-color: var(--primary);
+}
+.concept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.concept-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.concept-card:hover { transform: translateY(-2px); }
+.concept-card.selected { border-color: var(--primary); }
+.concept-thumb {
+  width: 100%; height: 140px;
+  position: relative;
+}
+.concept-thumb .ai-score {
+  position: absolute; top: 8px; right: 8px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; color: #fff;
+}
+.concept-thumb .ai-score.high { background: var(--green); }
+.concept-thumb .ai-score.mid { background: var(--orange); }
+.concept-body { padding: 12px; }
+.concept-body .concept-title { font-size: 13px; font-weight: 500; color: var(--heading-text); margin-bottom: 4px; }
+.concept-body .concept-detail { font-size: 11px; color: var(--tertiary-text); }
+.score-breakdown {
+  display: flex; gap: 8px; margin-top: 6px;
+}
+.score-breakdown span { font-size: 10px; color: var(--tertiary-text); }
+
+/* Storyboard */
+.storyboard-scroll {
+  display: flex; gap: 12px;
+  overflow-x: auto; padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+.keyframe-card {
+  min-width: 200px; max-width: 200px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.keyframe-thumb { width: 100%; height: 100px; position: relative; }
+.keyframe-thumb .time-badge {
+  position: absolute; bottom: 6px; left: 6px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-size: 10px; padding: 2px 6px; border-radius: 4px;
+}
+.keyframe-thumb .edit-btn {
+  position: absolute; top: 6px; right: 6px;
+  width: 24px; height: 24px;
+  background: rgba(255,255,255,0.9); border-radius: 50%;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all 0.2s;
+}
+.keyframe-thumb .edit-btn:hover { background: var(--primary-light-1); }
+.keyframe-body { padding: 10px; font-size: 12px; color: var(--secondary-text); line-height: 1.4; }
+
+.prompt-timeline { margin-bottom: 24px; }
+.prompt-row {
+  padding: 12px 16px;
+  border-left: 3px solid var(--primary-light-1);
+  margin-bottom: 8px;
+  background: var(--bg-surface);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.prompt-row:hover { border-left-color: var(--primary); }
+.prompt-row .prompt-time { font-size: 11px; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
+.prompt-row .prompt-desc { font-size: 13px; color: var(--secondary-text); }
+
+.video-concepts { display: flex; gap: 16px; margin-bottom: 20px; }
+.video-concept-card {
+  flex: 1;
+  padding: 16px;
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.video-concept-card:hover { border-color: var(--primary); }
+.video-concept-card.active { border-color: var(--primary); background: var(--primary-light-2); }
+.video-concept-card .vc-score { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+.video-concept-card .vc-name { font-size: 14px; font-weight: 600; color: var(--heading-text); margin-bottom: 2px; }
+.video-concept-card .vc-desc { font-size: 12px; color: var(--tertiary-text); }
+
+/* Step 5 - Generate */
+.generate-view { max-width: 640px; margin: 0 auto; }
+.progress-steps-list { margin-bottom: 32px; }
+.progress-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  margin-bottom: 8px;
+  box-shadow: var(--card-shadow);
+}
+.progress-step .ps-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.progress-step .ps-icon.done { background: var(--green); color: #fff; }
+.progress-step .ps-icon.loading { background: var(--primary-light-1); color: var(--primary); animation: spin 1s linear infinite; }
+.progress-step .ps-icon.waiting { background: var(--border-subtle); color: var(--tertiary-text); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.progress-step .ps-text { font-size: 14px; color: var(--heading-text); font-weight: 500; }
+.progress-step .ps-text.dimmed { color: var(--tertiary-text); }
+.progress-bar-container {
+  width: 100%; height: 6px;
+  background: var(--border-subtle);
+  border-radius: 3px; overflow: hidden;
+  margin-bottom: 8px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.progress-hint { font-size: 12px; color: var(--tertiary-text); text-align: center; }
+
+/* Ready state */
+.ready-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 16px; margin-bottom: 24px;
+  max-width: 100%;
+}
+.ready-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.ready-card .ready-thumb {
+  width: 100%; height: 200px;
+  position: relative;
+}
+.ready-card .ready-thumb .ai-score {
+  position: absolute; top: 8px; right: 8px;
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; color: #fff;
+  background: var(--green);
+}
+.ready-card .ready-body {
+  padding: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ready-card .ready-format { font-size: 12px; color: var(--secondary-text); }
+.ready-card .ready-actions { display: flex; gap: 6px; }
+.ready-card .ready-actions button {
+  font-size: 11px; padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  cursor: pointer; transition: all 0.2s;
+  color: var(--secondary-text);
+}
+.ready-card .ready-actions button:hover {
+  border-color: var(--primary); color: var(--primary);
+}
+.multi-format-row { display: flex; gap: 12px; margin-bottom: 24px; overflow-x: auto; }
+.format-thumb {
+  min-width: 100px; text-align: center;
+  cursor: pointer;
+}
+.format-thumb .ft-preview {
+  width: 100px; height: 70px;
+  border-radius: var(--radius-md);
+  margin-bottom: 4px;
+  border: 2px solid var(--border-subtle);
+  transition: border-color 0.2s;
+}
+.format-thumb:hover .ft-preview { border-color: var(--primary); }
+.format-thumb .ft-label { font-size: 11px; color: var(--tertiary-text); }
+
+.ai-copy-section { margin-bottom: 24px; }
+.copy-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.copy-tab {
+  font-size: 13px; padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  cursor: pointer; transition: all 0.2s;
+  color: var(--secondary-text);
+}
+.copy-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.copy-text-box {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-size: 13px; color: var(--secondary-text);
+  line-height: 1.6;
+  position: relative;
+}
+.copy-btn-row { display: flex; gap: 8px; margin-top: 8px; }
+
+/* Step 6 - Publish */
+.platform-list { margin-bottom: 24px; }
+.platform-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  margin-bottom: 8px;
+  box-shadow: var(--card-shadow);
+}
+.platform-info { display: flex; align-items: center; gap: 12px; }
+.platform-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.platform-name { font-size: 14px; font-weight: 500; color: var(--heading-text); }
+.platform-status { font-size: 12px; }
+.platform-status.connected { color: var(--green); }
+.platform-status.disconnected { color: var(--tertiary-text); }
+.status-dot {
+  display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; margin-right: 4px;
+}
+.status-dot.green { background: var(--green); }
+.schedule-section { margin-top: 20px; }
+.schedule-toggle {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.ai-time-suggest {
+  padding: 12px;
+  background: linear-gradient(135deg, var(--primary-light-2), var(--primary-light-3));
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 12px;
+}
+.ai-time-suggest .ats-text { font-size: 12px; color: var(--secondary-text); }
+
+.post-preview-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  position: sticky; top: 24px;
+}
+.post-preview-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.post-preview-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+}
+.post-preview-caption { font-size: 13px; color: var(--secondary-text); line-height: 1.5; }
+.post-preview-hashtags { font-size: 12px; color: var(--primary); margin-top: 6px; }
+
+/* ===== ANALYTICS VIEW ===== */
+.analytics-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+}
+.date-selector {
+  display: flex; align-items: center; gap: 8px;
+}
+.date-selector select {
+  font-family: var(--font-body); font-size: 13px;
+  padding: 6px 12px; border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); background: var(--bg-surface);
+  color: var(--heading-text); cursor: pointer;
+}
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+}
+.kpi-card .kpi-label { font-size: 12px; color: var(--tertiary-text); margin-bottom: 4px; }
+.kpi-card .kpi-value { font-size: 24px; font-weight: 700; color: var(--heading-text); font-family: var(--font-heading); }
+.kpi-card .kpi-change {
+  font-size: 12px; font-weight: 600;
+  padding: 2px 6px; border-radius: 4px;
+  display: inline-block; margin-top: 4px;
+}
+.kpi-card .kpi-change.up { background: #e8f8ef; color: var(--green); }
+.kpi-card .kpi-change.down { background: #fdecea; color: var(--red); }
+.kpi-card .sparkline {
+  margin-top: 8px; height: 30px;
+  display: flex; align-items: flex-end; gap: 2px;
+}
+.kpi-card .sparkline .bar {
+  flex: 1; border-radius: 2px 2px 0 0;
+  background: var(--primary-light-1);
+  transition: height 0.3s;
+}
+
+.chart-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.chart-card .chart-title {
+  font-family: var(--font-heading);
+  font-size: 16px; font-weight: 600;
+  color: var(--heading-text); margin-bottom: 16px;
+}
+.chart-legend { display: flex; gap: 16px; margin-bottom: 12px; }
+.chart-legend .legend-item {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--secondary-text);
+}
+.chart-legend .legend-dot {
+  width: 10px; height: 10px; border-radius: 2px;
+}
+.bar-chart {
+  display: flex; align-items: flex-end; gap: 16px;
+  height: 180px; padding-top: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+.bar-group {
+  flex: 1;
+  display: flex; gap: 4px; align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+.bar-group .bar {
+  width: 24px; border-radius: 4px 4px 0 0;
+  transition: height 0.3s;
+}
+.bar-group .bar.impressions { background: var(--primary); }
+.bar-group .bar.engagement { background: var(--primary-light-1); }
+.bar-labels { display: flex; gap: 16px; margin-top: 8px; }
+.bar-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--tertiary-text); }
+.y-axis {
+  position: absolute; left: -40px; top: 0; bottom: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.y-axis span { font-size: 10px; color: var(--tertiary-text); }
+
+.table-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.table-card .table-header {
+  padding: 16px 20px;
+  font-family: var(--font-heading);
+  font-size: 16px; font-weight: 600;
+  color: var(--heading-text);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  padding: 10px 16px;
+  font-size: 11px; font-weight: 600;
+  color: var(--tertiary-text);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 13px; color: var(--secondary-text);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .status-active { color: var(--green); font-weight: 500; }
+.data-table .status-completed { color: var(--tertiary-text); font-weight: 500; }
+.data-table .status-scheduled { color: var(--orange); font-weight: 500; }
+
+.ai-insights-panel {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  border-left: 4px solid var(--primary);
+  padding: 20px 24px;
+}
+.ai-insights-panel .aip-title {
+  font-family: var(--font-heading);
+  font-size: 16px; font-weight: 600;
+  color: var(--heading-text);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.insight-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+}
+.insight-item:last-child { border-bottom: none; }
+.insight-item .insight-text { font-size: 13px; color: var(--secondary-text); flex: 1; }
+.insight-item .insight-btn {
+  font-size: 11px; font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: none; cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.insight-item .insight-btn:hover { background: var(--primary-light-2); }
+
+/* ===== GENERATE TOGGLE (step 5) ===== */
+.gen-state-toggle {
+  display: flex; gap: 8px; margin-bottom: 20px; justify-content: center;
+}
+
+/* ===== RESPONSIVE / UTILITY ===== */
+.hidden { display: none !important; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.text-center { text-align: center; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+
+/* Gradient backgrounds for mock thumbnails */
+.grad-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.grad-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.grad-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.grad-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.grad-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.grad-6 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+.grad-7 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+.grad-8 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+.grad-9 { background: linear-gradient(135deg, #6933fa 0%, #3535f3 100%); }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAVIGATION ===== -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <a class="logo">
+      <span class="logo-diamond"></span>
+      <span>pixelbin</span>
+      <span class="logo-badge">Marketing Studio</span>
+    </a>
+  </div>
+  <div class="nav-center">
+    <span>Home</span>
+    <span class="sep">/</span>
+    <span class="current" id="breadcrumb-current">Generate Ad</span>
+  </div>
+  <div class="nav-right">
+    <div class="credits-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      24 Credits
+    </div>
+    <button class="nav-icon-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <div class="user-avatar">AP</div>
+  </div>
+</nav>
+
+<!-- ===== APP LAYOUT ===== -->
+<div class="app-layout">
+
+  <!-- ===== LEFT SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-menu">
+      <div class="sidebar-item" data-view="brand" onclick="switchView('brand')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Brand Settings
+      </div>
+      <div class="sidebar-item active" data-view="generate" onclick="switchView('generate')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.09 3.26L16.36 6l-2.6 2.09.64 3.41L12 9.77 9.6 11.5l.64-3.41L7.64 6l3.27-.74z"/><path d="M5 20l1.09-3.26L3.5 14.65l3.27-.74L7.86 10.5 10 12.59l3.41-.64L11.32 15l.74 3.27L9 17.18z"/><path d="M19 20l-1.09-3.26 2.59-2.09-3.27-.74L16.14 10.5 14 12.59l-3.41-.64L12.68 15l-.74 3.27L15 17.18z"/></svg>
+        Generate Ad
+      </div>
+      <div class="sidebar-item" data-view="analytics" onclick="switchView('analytics')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-secondary" onclick="switchView('generate')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        My Creatives
+      </div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="plan-badge">Free Plan</div>
+      <button class="btn-upgrade">Upgrade</button>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+
+    <!-- ===== VIEW 1: BRAND SETTINGS ===== -->
+    <div class="content-view" id="view-brand">
+      <div class="view-header">
+        <h1>Brand Kit</h1>
+        <p>Set up your brand identity once. Every creative will stay on-brand automatically.</p>
+      </div>
+      <div class="view-body">
+        <!-- Import Section -->
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span style="font-size:15px;font-weight:600;color:var(--heading-text);">Import from Website</span>
+          </div>
+          <div class="brand-import-row">
+            <input type="text" class="form-input" placeholder="https://yourbrand.com" style="flex:1;">
+            <button class="btn-primary">Import Brand</button>
+          </div>
+          <p class="form-hint" style="margin-top:6px;">We'll auto-extract your logo, colors, fonts, and style from your website</p>
+        </div>
+
+        <!-- Brand Identity -->
+        <div class="card">
+          <div class="card-title">Brand Identity</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group">
+              <label class="form-label">Brand Name</label>
+              <input type="text" class="form-input" placeholder="Your Brand Name" value="GlowSkin Co.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Industry</label>
+              <select class="form-select">
+                <option>Beauty & Skincare</option>
+                <option>E-commerce</option>
+                <option>Fashion & Apparel</option>
+                <option>Food & Beverage</option>
+                <option>Technology</option>
+                <option>Real Estate</option>
+                <option>Education</option>
+                <option>Health & Wellness</option>
+                <option>Travel</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Brand Description</label>
+            <textarea class="form-textarea" rows="2" placeholder="Brief description of your brand">Premium organic skincare for modern women. Clinically proven formulas with natural ingredients.</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Logo</label>
+            <div class="upload-zone" style="display:flex;align-items:center;gap:16px;text-align:left;">
+              <div style="width:64px;height:64px;background:var(--primary-light-2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:500;color:var(--heading-text);">Drop logo here or click to upload</div>
+                <div style="font-size:11px;color:var(--tertiary-text);">SVG, PNG up to 5MB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Palette -->
+        <div class="card">
+          <div class="card-title">Color Palette</div>
+          <p class="form-hint" style="margin-bottom:12px;">Auto-extracted from website</p>
+          <div class="color-palette-row">
+            <div class="color-item">
+              <div class="color-circle" style="background:#6933fa;"></div>
+              <span class="color-hex">#6933fa</span>
+              <span class="color-label">Primary</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background:#1a1a2e;"></div>
+              <span class="color-hex">#1a1a2e</span>
+              <span class="color-label">Secondary</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background:#e74c3c;"></div>
+              <span class="color-hex">#e74c3c</span>
+              <span class="color-label">Accent</span>
+            </div>
+            <div class="color-item">
+              <div class="color-circle" style="background:#ffffff;border-color:#ddd;"></div>
+              <span class="color-hex">#ffffff</span>
+              <span class="color-label">Background</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="card">
+          <div class="card-title">Typography</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group">
+              <label class="form-label">Heading Font</label>
+              <select class="form-select">
+                <option>Inter Tight</option>
+                <option>Poppins</option>
+                <option>Montserrat</option>
+                <option>Playfair Display</option>
+                <option>Bebas Neue</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Body Font</label>
+              <select class="form-select">
+                <option>Inter</option>
+                <option>Open Sans</option>
+                <option>Roboto</option>
+                <option>Lato</option>
+                <option>Source Sans Pro</option>
+              </select>
+            </div>
+          </div>
+          <div class="font-preview">
+            <div class="heading-preview">The quick brown fox jumps over</div>
+            <div class="body-preview">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</div>
+          </div>
+        </div>
+
+        <!-- Tone & Style -->
+        <div class="card">
+          <div class="card-title">Tone & Style</div>
+          <div class="form-group">
+            <label class="form-label">Tone of Voice</label>
+            <div class="tone-pills">
+              <span class="pill-tag active" onclick="this.classList.toggle('active')">Professional</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Playful</span>
+              <span class="pill-tag active" onclick="this.classList.toggle('active')">Bold</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Minimal</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Luxurious</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Friendly</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Edgy</span>
+              <span class="pill-tag active" onclick="this.classList.toggle('active')">Sophisticated</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Visual Style</label>
+            <div class="style-pills">
+              <span class="pill-tag active" onclick="this.classList.toggle('active')">Clean & Minimal</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Bright & Colorful</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Dark & Moody</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Premium & Elegant</span>
+              <span class="pill-tag" onclick="this.classList.toggle('active')">Vibrant & Energetic</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Reference Images</label>
+            <div class="upload-zone">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <div class="upload-text">Add 3-5 reference images that represent your brand aesthetic</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Assets -->
+        <div class="card">
+          <div class="card-title">Product Assets</div>
+          <div class="product-grid">
+            <div class="product-upload">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <div style="margin-top:6px;">Product Image 1</div>
+            </div>
+            <div class="product-upload">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <div style="margin-top:6px;">Product Image 2</div>
+            </div>
+            <div class="product-upload">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <div style="margin-top:6px;">Product Image 3</div>
+            </div>
+            <div class="product-upload">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <div style="margin-top:6px;">Product Image 4</div>
+            </div>
+          </div>
+          <p class="form-hint" style="margin-top:8px;">These images will be used in your ad creatives</p>
+        </div>
+
+        <div style="text-align:right;">
+          <button class="btn-primary" style="padding:12px 32px;">Save Brand Kit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW 2: GENERATE AD ===== -->
+    <div class="content-view active" id="view-generate">
+      <!-- Step Progress Bar -->
+      <div class="step-bar">
+        <div class="step-wrapper">
+          <div class="step-circle active" data-step="1" onclick="goToStep(1)">1</div>
+          <div class="step-label active">Campaign Brief</div>
+        </div>
+        <div class="step-connector" id="conn-1-2"></div>
+        <div class="step-wrapper">
+          <div class="step-circle" data-step="2" onclick="goToStep(2)">2</div>
+          <div class="step-label">Discover</div>
+        </div>
+        <div class="step-connector" id="conn-2-3"></div>
+        <div class="step-wrapper">
+          <div class="step-circle" data-step="3" onclick="goToStep(3)">3</div>
+          <div class="step-label">Creative Direction</div>
+        </div>
+        <div class="step-connector" id="conn-3-4"></div>
+        <div class="step-wrapper">
+          <div class="step-circle" data-step="4" onclick="goToStep(4)">4</div>
+          <div class="step-label">Plan Review</div>
+        </div>
+        <div class="step-connector" id="conn-4-5"></div>
+        <div class="step-wrapper">
+          <div class="step-circle" data-step="5" onclick="goToStep(5)">5</div>
+          <div class="step-label">Generate</div>
+        </div>
+        <div class="step-connector" id="conn-5-6"></div>
+        <div class="step-wrapper">
+          <div class="step-circle" data-step="6" onclick="goToStep(6)">6</div>
+          <div class="step-label">Publish</div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 1: Campaign Brief ===== -->
+      <div class="step-content active" id="step-1">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1>Campaign Brief</h1>
+          <p>Tell us about your campaign and we'll find the best creative approach.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="two-col">
+            <div class="col-left">
+              <!-- Ad Format -->
+              <div class="form-group">
+                <label class="form-label">Ad Format</label>
+                <div class="format-selector">
+                  <div class="format-card active" id="format-image" onclick="selectFormat('image')">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <div class="format-name">Image Ad</div>
+                    <div class="format-desc">Static creatives for feeds & display</div>
+                  </div>
+                  <div class="format-card" id="format-video" onclick="selectFormat('video')">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    <div class="format-name">Video Ad</div>
+                    <div class="format-desc">Motion content for reels & stories</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Duration (video only) -->
+              <div class="form-group duration-row hidden" id="duration-field">
+                <label class="form-label">Duration</label>
+                <select class="form-select" style="max-width:200px;">
+                  <option>5 seconds</option>
+                  <option>10 seconds</option>
+                  <option selected>15 seconds</option>
+                  <option>30 seconds</option>
+                  <option>60 seconds</option>
+                </select>
+              </div>
+
+              <!-- Campaign Objective -->
+              <div class="form-group">
+                <label class="form-label">Campaign Objective</label>
+                <select class="form-select" id="objective-select" onchange="updateSummary()">
+                  <option>Brand Awareness</option>
+                  <option>Lead Generation</option>
+                  <option selected>Product Launch</option>
+                  <option>Sales & Conversion</option>
+                  <option>Engagement & Followers</option>
+                  <option>App Install</option>
+                  <option>Website Traffic</option>
+                  <option>Event Promotion</option>
+                </select>
+              </div>
+
+              <!-- Product / Service -->
+              <div class="form-group">
+                <label class="form-label">Product / Service</label>
+                <input type="text" class="form-input" placeholder="e.g., Organic Face Serum - Anti-aging night cream with retinol" value="Organic Face Serum - Anti-aging night cream with retinol" id="product-input" oninput="updateSummary()">
+              </div>
+
+              <!-- Industry -->
+              <div class="form-group">
+                <label class="form-label">Industry</label>
+                <select class="form-select" id="industry-select" onchange="updateSummary()">
+                  <option>E-commerce</option>
+                  <option>Fashion & Apparel</option>
+                  <option selected>Beauty & Skincare</option>
+                  <option>Food & Beverage</option>
+                  <option>Technology</option>
+                  <option>Real Estate</option>
+                  <option>Education</option>
+                  <option>Health & Wellness</option>
+                  <option>Travel</option>
+                  <option>Automotive</option>
+                  <option>Finance</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <!-- Target Audience -->
+              <div class="form-group">
+                <label class="form-label">Target Audience</label>
+                <input type="text" class="form-input" placeholder="e.g., Women 25-45, skincare enthusiasts, urban professionals" value="Women 25-45, skincare enthusiasts, urban professionals">
+              </div>
+
+              <!-- Platform -->
+              <div class="form-group">
+                <label class="form-label">Platform</label>
+                <div class="platform-pills" id="platform-pills">
+                  <span class="pill-tag active" onclick="togglePill(this)">Instagram Reels</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Instagram Feed</span>
+                  <span class="pill-tag active" onclick="togglePill(this)">TikTok</span>
+                  <span class="pill-tag" onclick="togglePill(this)">YouTube Shorts</span>
+                  <span class="pill-tag" onclick="togglePill(this)">LinkedIn</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Facebook</span>
+                  <span class="pill-tag" onclick="togglePill(this)">X (Twitter)</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Google Display</span>
+                </div>
+              </div>
+
+              <!-- Ad Size -->
+              <div class="form-group">
+                <label class="form-label">Ad Size</label>
+                <div class="platform-pills">
+                  <span class="pill-tag" onclick="togglePill(this)">Post (1080x1080)</span>
+                  <span class="pill-tag active" onclick="togglePill(this)">Story/Reel (1080x1920)</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Landscape (1200x628)</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Portrait (1080x1350)</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Pin (1000x1500)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-right">
+              <div class="summary-card">
+                <h3>Campaign Summary</h3>
+                <div id="summary-items">
+                  <div class="summary-item"><span class="label">Format</span><span class="value" id="sum-format">Image Ad</span></div>
+                  <div class="summary-item"><span class="label">Objective</span><span class="value" id="sum-objective">Product Launch</span></div>
+                  <div class="summary-item"><span class="label">Industry</span><span class="value" id="sum-industry">Beauty & Skincare</span></div>
+                  <div class="summary-item"><span class="label">Platforms</span><span class="value" id="sum-platforms">Instagram Reels, TikTok</span></div>
+                  <div class="summary-item"><span class="label">Size</span><span class="value">Story/Reel (1080x1920)</span></div>
+                </div>
+                <div class="ai-tip">
+                  <div class="badge">AI Recommendation</div>
+                  <div style="margin-top:4px;">Tip: GRWM and Before/After formats perform 2.3x better for Beauty brands on Instagram Reels</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: Discover ===== -->
+      <div class="step-content" id="step-2">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1>Discover Inspiration</h1>
+          <p>Select trending content that matches your campaign. We'll use these as creative references.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="filter-pills">
+            <span class="pill-tag active" onclick="filterDiscover(this)">All</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Beauty</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Fitness</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Tech</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">F&B</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Fashion</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Lifestyle</span>
+            <span class="pill-tag" onclick="filterDiscover(this)">Product Demo</span>
+          </div>
+          <div class="discover-grid">
+            <!-- Card 1 -->
+            <div class="discover-card selected" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-1">
+                <div class="hot-badge">HOT</div>
+                <div class="check-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:28</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@glowbeauty</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">2.4M</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">145K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">32K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">89K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">GRWM</div>
+                <div class="hook-preview">"Wait till you see the transformation..."</div>
+                <div class="remix-time">Estimated remix: ~2 min</div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="discover-card selected" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-2">
+                <div class="hot-badge">HOT</div>
+                <div class="check-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:15</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@skinroutine</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">1.8M</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">98K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">24K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">67K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">Before/After</div>
+                <div class="hook-preview">"Day 1 vs Day 14 of using this serum..."</div>
+                <div class="remix-time">Estimated remix: ~3 min</div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="discover-card selected" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-3">
+                <div class="check-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:22</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@dermaexpert</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">956K</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">72K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">18K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">45K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">Product Demo</div>
+                <div class="hook-preview">"POV: You finally found the right serum"</div>
+                <div class="remix-time">Estimated remix: ~2 min</div>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="discover-card" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-5">
+                <div class="check-box"></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:30</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@cleanbeautyco</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">743K</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">54K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">12K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">31K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">Testimonial</div>
+                <div class="hook-preview">"I've never had so many compliments..."</div>
+                <div class="remix-time">Estimated remix: ~3 min</div>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="discover-card" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-4">
+                <div class="check-box"></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:18</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@ugcqueen</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">612K</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">41K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">9K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">22K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">UGC</div>
+                <div class="hook-preview">"Okay this is now a holy grail product"</div>
+                <div class="remix-time">Estimated remix: ~2 min</div>
+              </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="discover-card" onclick="toggleDiscoverCard(this)">
+              <div class="thumb grad-6">
+                <div class="check-box"></div>
+                <div class="play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#333"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div class="duration-badge">0:25</div>
+              </div>
+              <div class="card-body">
+                <div class="brand-name">@serumsisters</div>
+                <div class="discover-metrics">
+                  <div class="metric"><div class="val">489K</div><div class="lbl">Views</div></div>
+                  <div class="metric"><div class="val">35K</div><div class="lbl">Likes</div></div>
+                  <div class="metric"><div class="val">7K</div><div class="lbl">Shares</div></div>
+                  <div class="metric"><div class="val">19K</div><div class="lbl">Saves</div></div>
+                </div>
+                <div class="format-pill">Unboxing</div>
+                <div class="hook-preview">"Unboxing this viral skincare set..."</div>
+                <div class="remix-time">Estimated remix: ~2 min</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
+            <div style="font-size:13px;color:var(--secondary-text);"><strong id="discover-count">3</strong> references selected</div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:13px;color:var(--tertiary-text);cursor:pointer;" onclick="goToStep(3)">Or skip this step</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: Creative Direction ===== -->
+      <div class="step-content" id="step-3">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1>Creative Direction</h1>
+          <p>Fine-tune your creative. We've pre-filled based on your inspiration selection.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="two-col">
+            <div style="flex:55;">
+              <!-- Creative Style -->
+              <div class="form-group">
+                <label class="form-label">Creative Style</label>
+                <div class="radio-cards">
+                  <div class="radio-card" onclick="selectRadio(this)">
+                    <div class="rc-icon">🏠</div>
+                    <div class="rc-name">Lifestyle Scene</div>
+                    <div class="rc-desc">Show product in real-life context</div>
+                  </div>
+                  <div class="radio-card active" onclick="selectRadio(this)">
+                    <div class="rc-icon">📸</div>
+                    <div class="rc-name">Product Focused</div>
+                    <div class="rc-desc">Clean product hero shot</div>
+                  </div>
+                  <div class="radio-card" onclick="selectRadio(this)">
+                    <div class="rc-icon">🔄</div>
+                    <div class="rc-name">Before/After</div>
+                    <div class="rc-desc">Show transformation results</div>
+                  </div>
+                  <div class="radio-card" onclick="selectRadio(this)">
+                    <div class="rc-icon">🤳</div>
+                    <div class="rc-name">UGC Style</div>
+                    <div class="rc-desc">Authentic user-generated feel</div>
+                  </div>
+                  <div class="radio-card" onclick="selectRadio(this)">
+                    <div class="rc-icon">💬</div>
+                    <div class="rc-name">Testimonial</div>
+                    <div class="rc-desc">Customer review/quote based</div>
+                  </div>
+                  <div class="radio-card" onclick="selectRadio(this)">
+                    <div class="rc-icon">🔥</div>
+                    <div class="rc-name">Trend Remix</div>
+                    <div class="rc-desc">Remix from trending format</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Text on Creative -->
+              <div class="form-group">
+                <label class="form-label">Headline</label>
+                <input type="text" class="form-input" value="Transform Your Skin Overnight" id="headline-input" oninput="updatePreview()">
+                <div class="char-count"><span id="headline-count">30</span> / 60 characters</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tagline</label>
+                <input type="text" class="form-input" value="Clinically proven results in 14 days" id="tagline-input" oninput="updatePreview()">
+                <div class="char-count"><span id="tagline-count">36</span> / 80 characters</div>
+              </div>
+              <div class="form-group" style="display:flex;gap:12px;align-items:flex-end;">
+                <div style="flex:1;">
+                  <label class="form-label">CTA Text</label>
+                  <select class="form-select" id="cta-select" onchange="updatePreview()">
+                    <option selected>Shop Now</option>
+                    <option>Learn More</option>
+                    <option>Try Free</option>
+                    <option>Get Yours</option>
+                    <option>Order Now</option>
+                    <option>Book Now</option>
+                  </select>
+                </div>
+                <button class="btn-secondary" style="margin-bottom:0;white-space:nowrap;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.09 3.26L16.36 6l-2.6 2.09.64 3.41L12 9.77 9.6 11.5l.64-3.41L7.64 6l3.27-.74z"/></svg>
+                  Generate AI Copy
+                </button>
+              </div>
+
+              <!-- Visual Preferences -->
+              <div class="visual-section">
+                <div class="section-label">Background Style</div>
+                <div class="platform-pills">
+                  <span class="pill-tag active" onclick="togglePill(this)">Studio</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Outdoor</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Interior</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Abstract</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Gradient</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Solid Color</span>
+                </div>
+              </div>
+              <div class="visual-section">
+                <div class="section-label">Color Mood</div>
+                <div class="platform-pills">
+                  <span class="pill-tag active" onclick="togglePill(this)">Warm</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Cool</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Neutral</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Vibrant</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Pastel</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Dark</span>
+                </div>
+              </div>
+              <div class="visual-section">
+                <div class="section-label">Composition</div>
+                <div class="platform-pills">
+                  <span class="pill-tag active" onclick="togglePill(this)">Center</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Rule of Thirds</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Asymmetric</span>
+                  <span class="pill-tag" onclick="togglePill(this)">Full Bleed</span>
+                </div>
+              </div>
+
+              <!-- Video-only options -->
+              <div id="video-options" class="hidden">
+                <div class="visual-section">
+                  <div class="section-label">Music Mood</div>
+                  <select class="form-select" style="max-width:250px;">
+                    <option>Upbeat</option>
+                    <option>Calm</option>
+                    <option selected>Energetic</option>
+                    <option>Dramatic</option>
+                    <option>Trendy</option>
+                    <option>Lo-fi</option>
+                  </select>
+                </div>
+                <div class="visual-section">
+                  <div class="section-label">Transition Style</div>
+                  <div class="platform-pills">
+                    <span class="pill-tag active" onclick="togglePill(this)">Cut</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Fade</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Swipe</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Zoom</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Morph</span>
+                  </div>
+                </div>
+                <div class="visual-section">
+                  <div class="section-label">Subtitle Style</div>
+                  <div class="platform-pills">
+                    <span class="pill-tag active" onclick="togglePill(this)">Bold Bottom</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Kinetic</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Minimal</span>
+                    <span class="pill-tag" onclick="togglePill(this)">Word-by-Word</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:45;">
+              <div class="phone-preview">
+                <div class="phone-frame grad-9">
+                  <div class="preview-logo">
+                    <span class="logo-diamond" style="width:14px;height:14px;border-radius:3px;"></span>
+                  </div>
+                  <div class="preview-text">
+                    <div class="preview-headline" id="preview-headline">Transform Your Skin Overnight</div>
+                    <div class="preview-tagline" id="preview-tagline">Clinically proven results in 14 days</div>
+                    <span class="preview-cta" id="preview-cta">Shop Now</span>
+                  </div>
+                </div>
+                <div class="preview-note">Preview updates in real-time</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 4: Plan Review ===== -->
+      <div class="step-content" id="step-4">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1>Creative Plan</h1>
+          <p>Review your AI-generated creative plan. Approve or regenerate options.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="plan-toggle">
+            <button class="plan-toggle-btn" onclick="switchPlanView('image', this)" id="plan-image-btn">Image Plan</button>
+            <button class="plan-toggle-btn active" onclick="switchPlanView('video', this)" id="plan-video-btn">Video Plan</button>
+          </div>
+
+          <!-- Image Plan View -->
+          <div id="plan-image-view" class="hidden">
+            <div class="concept-grid">
+              <div class="concept-card selected" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-1"><div class="ai-score high">92/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Hero Product Center, Dark Background</div>
+                  <div class="concept-detail">Bold Typography, Warm Lighting</div>
+                  <div class="score-breakdown"><span>Engagement: 94</span><span>Clarity: 88</span><span>Brand Fit: 91</span></div>
+                </div>
+              </div>
+              <div class="concept-card" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-5"><div class="ai-score high">87/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Split Layout, Before/After</div>
+                  <div class="concept-detail">Clean Lines, Soft Gradient</div>
+                  <div class="score-breakdown"><span>Engagement: 89</span><span>Clarity: 85</span><span>Brand Fit: 87</span></div>
+                </div>
+              </div>
+              <div class="concept-card" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-3"><div class="ai-score high">90/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Lifestyle Close-up, Natural Light</div>
+                  <div class="concept-detail">Earthy Tones, Minimal Text</div>
+                  <div class="score-breakdown"><span>Engagement: 92</span><span>Clarity: 90</span><span>Brand Fit: 88</span></div>
+                </div>
+              </div>
+              <div class="concept-card" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-6"><div class="ai-score mid">82/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Flat Lay Composition</div>
+                  <div class="concept-detail">Pastel Background, Product Array</div>
+                  <div class="score-breakdown"><span>Engagement: 80</span><span>Clarity: 86</span><span>Brand Fit: 80</span></div>
+                </div>
+              </div>
+              <div class="concept-card" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-8"><div class="ai-score high">85/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Testimonial Card Layout</div>
+                  <div class="concept-detail">Quote Overlay, Soft Blur BG</div>
+                  <div class="score-breakdown"><span>Engagement: 83</span><span>Clarity: 90</span><span>Brand Fit: 82</span></div>
+                </div>
+              </div>
+              <div class="concept-card" onclick="this.classList.toggle('selected')">
+                <div class="concept-thumb grad-4"><div class="ai-score mid">79/100</div></div>
+                <div class="concept-body">
+                  <div class="concept-title">Bold Typography Hero</div>
+                  <div class="concept-detail">Text-forward, Vibrant Accent</div>
+                  <div class="score-breakdown"><span>Engagement: 76</span><span>Clarity: 82</span><span>Brand Fit: 78</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;">
+              <button class="btn-secondary">Generate More Options</button>
+              <span style="font-size:13px;color:var(--primary);cursor:pointer;">Regenerate All</span>
+            </div>
+          </div>
+
+          <!-- Video Plan View (default) -->
+          <div id="plan-video-view">
+            <div style="margin-bottom:20px;">
+              <div class="section-label" style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:12px;">Storyboard Timeline</div>
+              <div class="storyboard-scroll">
+                <div class="keyframe-card">
+                  <div class="keyframe-thumb grad-9">
+                    <div class="time-badge">0-2s</div>
+                    <button class="edit-btn" title="Edit">&#9998;</button>
+                  </div>
+                  <div class="keyframe-body"><strong>Hook</strong> - Close-up product reveal with text overlay</div>
+                </div>
+                <div class="keyframe-card">
+                  <div class="keyframe-thumb grad-2">
+                    <div class="time-badge">2-5s</div>
+                    <button class="edit-btn" title="Edit">&#9998;</button>
+                  </div>
+                  <div class="keyframe-body"><strong>Problem</strong> - Show skin concern with empathetic text</div>
+                </div>
+                <div class="keyframe-card">
+                  <div class="keyframe-thumb grad-3">
+                    <div class="time-badge">5-10s</div>
+                    <button class="edit-btn" title="Edit">&#9998;</button>
+                  </div>
+                  <div class="keyframe-body"><strong>Solution</strong> - Product application sequence</div>
+                </div>
+                <div class="keyframe-card">
+                  <div class="keyframe-thumb grad-4">
+                    <div class="time-badge">10-13s</div>
+                    <button class="edit-btn" title="Edit">&#9998;</button>
+                  </div>
+                  <div class="keyframe-body"><strong>Results</strong> - Before/After transformation</div>
+                </div>
+                <div class="keyframe-card">
+                  <div class="keyframe-thumb grad-1">
+                    <div class="time-badge">13-15s</div>
+                    <button class="edit-btn" title="Edit">&#9998;</button>
+                  </div>
+                  <div class="keyframe-body"><strong>CTA</strong> - Brand logo + Shop Now button</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Prompt Timeline -->
+            <div class="prompt-timeline">
+              <div class="section-label" style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:12px;">Detailed Prompt Timeline</div>
+              <div class="prompt-row">
+                <div class="prompt-time">0-2s: Hook</div>
+                <div class="prompt-desc">Camera slowly zooms into serum bottle on marble surface. Soft golden light. Text appears: "The Secret to Perfect Skin"</div>
+              </div>
+              <div class="prompt-row">
+                <div class="prompt-time">2-5s: Problem</div>
+                <div class="prompt-desc">Cut to woman touching face, looking concerned. Subtle warm filter. Text: "Tired of trying everything?"</div>
+              </div>
+              <div class="prompt-row">
+                <div class="prompt-time">5-10s: Solution</div>
+                <div class="prompt-desc">Close-up of serum dropping onto fingertip. Slow-motion application on cheek. Product name appears with key ingredients overlay.</div>
+              </div>
+              <div class="prompt-row">
+                <div class="prompt-time">10-13s: Results</div>
+                <div class="prompt-desc">Split screen before/after. Left: Day 1 skin. Right: Day 14 skin. Counter animates "14 Days". Glowing skin close-up.</div>
+              </div>
+              <div class="prompt-row">
+                <div class="prompt-time">13-15s: CTA</div>
+                <div class="prompt-desc">Brand logo center-screen with subtle particle effect. "Shop Now" button animates in. Discount code "GLOW20" fades in below.</div>
+              </div>
+            </div>
+
+            <!-- Video Concepts -->
+            <div class="section-label" style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:12px;">Video Concepts</div>
+            <div class="video-concepts">
+              <div class="video-concept-card active" onclick="selectVideoConcept(this)">
+                <div class="vc-score">94/100</div>
+                <div class="vc-name">Dramatic Reveal</div>
+                <div class="vc-desc">High-contrast, cinematic style with slow-motion product shots</div>
+              </div>
+              <div class="video-concept-card" onclick="selectVideoConcept(this)">
+                <div class="vc-score" style="color:var(--green);">89/100</div>
+                <div class="vc-name">Soft & Natural</div>
+                <div class="vc-desc">Organic, warm-toned lifestyle with natural lighting</div>
+              </div>
+              <div class="video-concept-card" onclick="selectVideoConcept(this)">
+                <div class="vc-score" style="color:var(--orange);">86/100</div>
+                <div class="vc-name">Trend Remix</div>
+                <div class="vc-desc">GRWM style with voiceover and trending audio</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;">
+              <button class="btn-secondary">Generate More Options</button>
+              <span style="font-size:13px;color:var(--primary);cursor:pointer;">Regenerate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 5: Generate ===== -->
+      <div class="step-content" id="step-5">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1 id="step5-title">Generating Your Ad</h1>
+          <p id="step5-subtitle">Please wait while we create your ad creative.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="gen-state-toggle">
+            <button class="plan-toggle-btn" onclick="switchGenState('generating', this)" id="gen-generating-btn">Generating...</button>
+            <button class="plan-toggle-btn active" onclick="switchGenState('ready', this)" id="gen-ready-btn">Ready</button>
+          </div>
+
+          <!-- Generating State -->
+          <div id="gen-generating" class="hidden">
+            <div class="generate-view">
+              <div class="progress-steps-list">
+                <div class="progress-step">
+                  <div class="ps-icon done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div class="ps-text">Analyzing your brand kit and creative direction...</div>
+                </div>
+                <div class="progress-step">
+                  <div class="ps-icon done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div class="ps-text">Compositing product with selected style...</div>
+                </div>
+                <div class="progress-step">
+                  <div class="ps-icon loading">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"><path d="M12 2v4m0 12v4m-7.07-14.93l2.83 2.83m8.49 8.49l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.49-8.49l2.83-2.83"/></svg>
+                  </div>
+                  <div class="ps-text">Applying brand colors, typography, and overlays...</div>
+                </div>
+                <div class="progress-step">
+                  <div class="ps-icon waiting"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="1"/></svg></div>
+                  <div class="ps-text dimmed">Rendering final creative variants...</div>
+                </div>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width:72%;"></div>
+              </div>
+              <div class="progress-hint">This usually takes 30-60 seconds</div>
+            </div>
+          </div>
+
+          <!-- Ready State (default) -->
+          <div id="gen-ready">
+            <div style="max-width:900px;">
+              <div class="ready-grid">
+                <div class="ready-card">
+                  <div class="ready-thumb grad-9"><div class="ai-score">94/100</div></div>
+                  <div class="ready-body">
+                    <div class="ready-format">Instagram Reel (9:16)</div>
+                    <div class="ready-actions">
+                      <button title="Download">&#8681; Download</button>
+                      <button title="Edit">&#9998; Edit in Studio</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="ready-card">
+                  <div class="ready-thumb grad-1"><div class="ai-score">91/100</div></div>
+                  <div class="ready-body">
+                    <div class="ready-format">TikTok (9:16)</div>
+                    <div class="ready-actions">
+                      <button title="Download">&#8681; Download</button>
+                      <button title="Edit">&#9998; Edit in Studio</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="ready-card">
+                  <div class="ready-thumb grad-2"><div class="ai-score">88/100</div></div>
+                  <div class="ready-body">
+                    <div class="ready-format">Instagram Feed (1:1)</div>
+                    <div class="ready-actions">
+                      <button title="Download">&#8681; Download</button>
+                      <button title="Edit">&#9998; Edit in Studio</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="ready-card">
+                  <div class="ready-thumb grad-5"><div class="ai-score">86/100</div></div>
+                  <div class="ready-body">
+                    <div class="ready-format">Facebook Ad (4:5)</div>
+                    <div class="ready-actions">
+                      <button title="Download">&#8681; Download</button>
+                      <button title="Edit">&#9998; Edit in Studio</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Multi-Format -->
+              <div class="card">
+                <div class="card-title">Multi-Format Exports</div>
+                <div class="multi-format-row">
+                  <div class="format-thumb"><div class="ft-preview grad-9" style="display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;">1:1</div><div class="ft-label">IG Feed 1:1</div></div>
+                  <div class="format-thumb"><div class="ft-preview grad-9" style="display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;">9:16</div><div class="ft-label">IG Story 9:16</div></div>
+                  <div class="format-thumb"><div class="ft-preview grad-9" style="display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;">4:5</div><div class="ft-label">FB Ad 4:5</div></div>
+                  <div class="format-thumb"><div class="ft-preview grad-9" style="display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;">16:9</div><div class="ft-label">LinkedIn 16:9</div></div>
+                </div>
+                <button class="btn-secondary">Download All Formats</button>
+              </div>
+
+              <!-- AI Copy -->
+              <div class="card ai-copy-section">
+                <div class="card-title">AI-Generated Copy</div>
+                <div class="copy-tabs">
+                  <button class="copy-tab active" onclick="switchCopyTab(this, 'instagram')">Instagram</button>
+                  <button class="copy-tab" onclick="switchCopyTab(this, 'linkedin')">LinkedIn</button>
+                  <button class="copy-tab" onclick="switchCopyTab(this, 'x')">X</button>
+                  <button class="copy-tab" onclick="switchCopyTab(this, 'tiktok')">TikTok</button>
+                </div>
+                <div class="copy-text-box" id="copy-text">
+                  Your skin deserves better than guesswork. &#10024;<br><br>
+                  Introducing our Organic Face Serum - clinically proven to transform your skin in just 14 days. Packed with retinol and natural botanicals for that overnight glow. &#10084;&#65039;<br><br>
+                  &#127807; 100% Organic | &#9989; Dermatologist Tested | &#128171; Visible Results in 2 Weeks<br><br>
+                  Tap the link in bio to shop now! Use code GLOW20 for 20% off your first order.<br><br>
+                  #skincare #organicbeauty #glowup #serumaddict #antiaging #naturalbeauty #skincareroutine #beautytips
+                </div>
+                <div class="copy-btn-row">
+                  <button class="btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('copy-text').innerText)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                  </button>
+                  <span style="font-size:13px;color:var(--primary);cursor:pointer;">Regenerate Copy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 6: Publish ===== -->
+      <div class="step-content" id="step-6">
+        <div class="view-header" style="padding:24px 0 0;">
+          <h1>Publish Your Ad</h1>
+          <p>Schedule or publish directly to your connected platforms.</p>
+        </div>
+        <div style="padding-top:20px;">
+          <div class="two-col">
+            <div style="flex:55;">
+              <!-- Connected Platforms -->
+              <div class="section-label" style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:12px;">Connected Platforms</div>
+              <div class="platform-list">
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:8px;color:#fff;font-size:14px;font-weight:700;">IG</div>
+                    <div>
+                      <div class="platform-name">Instagram</div>
+                      <div class="platform-status connected"><span class="status-dot green"></span>Connected as @glowskinco</div>
+                    </div>
+                  </div>
+                  <span style="font-size:12px;color:var(--tertiary-text);cursor:pointer;">Disconnect</span>
+                </div>
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:#0077B5;border-radius:8px;color:#fff;font-size:14px;font-weight:700;">in</div>
+                    <div>
+                      <div class="platform-name">LinkedIn</div>
+                      <div class="platform-status connected"><span class="status-dot green"></span>Connected</div>
+                    </div>
+                  </div>
+                  <span style="font-size:12px;color:var(--tertiary-text);cursor:pointer;">Disconnect</span>
+                </div>
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:#000;border-radius:8px;color:#fff;font-size:14px;font-weight:700;">X</div>
+                    <div>
+                      <div class="platform-name">X (Twitter)</div>
+                      <div class="platform-status disconnected">Not connected</div>
+                    </div>
+                  </div>
+                  <button class="btn-secondary" style="padding:5px 14px;font-size:12px;">Connect</button>
+                </div>
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:#000;border-radius:8px;color:#25F4EE;font-size:12px;font-weight:700;">TT</div>
+                    <div>
+                      <div class="platform-name">TikTok</div>
+                      <div class="platform-status disconnected">Not connected</div>
+                    </div>
+                  </div>
+                  <button class="btn-secondary" style="padding:5px 14px;font-size:12px;">Connect</button>
+                </div>
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:#FF0000;border-radius:8px;color:#fff;font-size:12px;font-weight:700;">YT</div>
+                    <div>
+                      <div class="platform-name">YouTube</div>
+                      <div class="platform-status disconnected">Not connected</div>
+                    </div>
+                  </div>
+                  <button class="btn-secondary" style="padding:5px 14px;font-size:12px;">Connect</button>
+                </div>
+                <div class="platform-row">
+                  <div class="platform-info">
+                    <div class="platform-icon" style="background:#1877F2;border-radius:8px;color:#fff;font-size:14px;font-weight:700;">fb</div>
+                    <div>
+                      <div class="platform-name">Facebook</div>
+                      <div class="platform-status connected"><span class="status-dot green"></span>Connected</div>
+                    </div>
+                  </div>
+                  <span style="font-size:12px;color:var(--tertiary-text);cursor:pointer;">Disconnect</span>
+                </div>
+              </div>
+
+              <!-- Schedule Settings -->
+              <div class="schedule-section">
+                <div class="section-label" style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:12px;">Schedule Settings</div>
+                <div class="schedule-toggle">
+                  <button class="plan-toggle-btn" onclick="toggleSchedule(this, 'now')" id="sched-now">Publish Now</button>
+                  <button class="plan-toggle-btn active" onclick="toggleSchedule(this, 'later')" id="sched-later">Schedule for Later</button>
+                </div>
+                <div id="schedule-fields">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div class="form-group">
+                      <label class="form-label">Date</label>
+                      <input type="date" class="form-input" value="2026-04-08">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Time</label>
+                      <input type="time" class="form-input" value="18:30">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Repeat</label>
+                    <select class="form-select" style="max-width:200px;">
+                      <option selected>None</option>
+                      <option>Daily</option>
+                      <option>Weekly</option>
+                      <option>Custom</option>
+                    </select>
+                  </div>
+                  <div class="ai-time-suggest">
+                    <div class="ats-text">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><path d="M12 2l1.09 3.26L16.36 6l-2.6 2.09.64 3.41L12 9.77 9.6 11.5l.64-3.41L7.64 6l3.27-.74z"/></svg>
+                      Best time for your audience: <strong>Tuesday 6:30 PM</strong>
+                    </div>
+                    <button class="btn-secondary" style="padding:4px 12px;font-size:11px;">Use This</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:45;">
+              <div class="post-preview-card">
+                <div style="font-size:14px;font-weight:600;color:var(--heading-text);margin-bottom:8px;">Post Preview</div>
+                <div class="post-preview-tabs">
+                  <button class="copy-tab active" onclick="switchPreviewTab(this)">Instagram</button>
+                  <button class="copy-tab" onclick="switchPreviewTab(this)">LinkedIn</button>
+                  <button class="copy-tab" onclick="switchPreviewTab(this)">Facebook</button>
+                </div>
+                <div class="post-preview-img grad-9" style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;">
+                  <div style="font-family:var(--font-heading);font-size:20px;font-weight:700;text-align:center;padding:0 20px;">Transform Your Skin Overnight</div>
+                  <div style="font-size:12px;opacity:0.8;margin-top:4px;">Clinically proven results in 14 days</div>
+                  <div style="margin-top:12px;padding:6px 16px;background:rgba(255,255,255,0.2);border-radius:var(--radius-pill);font-size:11px;font-weight:600;">Shop Now</div>
+                </div>
+                <div class="post-preview-caption" style="max-height:80px;overflow:hidden;">
+                  Your skin deserves better than guesswork. Introducing our Organic Face Serum - clinically proven to transform your skin in just 14 days...
+                </div>
+                <div class="post-preview-hashtags">#skincare #organicbeauty #glowup #serumaddict</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Bottom Navigation -->
+      <div class="step-bottom-nav" id="step-nav">
+        <button class="btn-ghost" id="back-btn" onclick="prevStep()" style="visibility:hidden;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </button>
+        <div id="step-bottom-info" style="font-size:13px;color:var(--tertiary-text);"></div>
+        <button class="btn-primary" id="next-btn" onclick="nextStep()">
+          Continue
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== VIEW 3: ANALYTICS ===== -->
+    <div class="content-view" id="view-analytics">
+      <div class="view-header">
+        <div class="analytics-header">
+          <div>
+            <h1>Campaign Analytics</h1>
+            <p>Track performance across all your published creatives.</p>
+          </div>
+          <div class="date-selector">
+            <select>
+              <option>Last 7 days</option>
+              <option>Last 14 days</option>
+              <option>Last 30 days</option>
+              <option>Last 90 days</option>
+            </select>
+            <label style="font-size:12px;color:var(--tertiary-text);display:flex;align-items:center;gap:4px;">
+              <input type="checkbox"> Compare
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="view-body" style="padding-top:0;">
+        <!-- KPI Row -->
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Impressions</div>
+            <div class="kpi-value">247.5K</div>
+            <span class="kpi-change up">+23.4%</span>
+            <div class="sparkline">
+              <div class="bar" style="height:40%;"></div>
+              <div class="bar" style="height:55%;"></div>
+              <div class="bar" style="height:45%;"></div>
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar" style="height:65%;"></div>
+              <div class="bar" style="height:85%;"></div>
+              <div class="bar" style="height:100%;background:var(--primary);"></div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Total Engagement</div>
+            <div class="kpi-value">18.2K</div>
+            <span class="kpi-change up">+15.7%</span>
+            <div class="sparkline">
+              <div class="bar" style="height:50%;"></div>
+              <div class="bar" style="height:60%;"></div>
+              <div class="bar" style="height:55%;"></div>
+              <div class="bar" style="height:65%;"></div>
+              <div class="bar" style="height:75%;"></div>
+              <div class="bar" style="height:80%;"></div>
+              <div class="bar" style="height:90%;background:var(--primary);"></div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Avg. CTR</div>
+            <div class="kpi-value">4.8%</div>
+            <span class="kpi-change up">+8.2%</span>
+            <div class="sparkline">
+              <div class="bar" style="height:60%;"></div>
+              <div class="bar" style="height:55%;"></div>
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar" style="height:65%;"></div>
+              <div class="bar" style="height:80%;"></div>
+              <div class="bar" style="height:75%;"></div>
+              <div class="bar" style="height:95%;background:var(--primary);"></div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Conversions</div>
+            <div class="kpi-value">342</div>
+            <span class="kpi-change down">-2.1%</span>
+            <div class="sparkline">
+              <div class="bar" style="height:80%;"></div>
+              <div class="bar" style="height:85%;"></div>
+              <div class="bar" style="height:75%;"></div>
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar" style="height:65%;"></div>
+              <div class="bar" style="height:60%;"></div>
+              <div class="bar" style="height:55%;background:var(--red);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Performance Chart -->
+        <div class="chart-card">
+          <div class="chart-title">Weekly Performance</div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--primary);"></div>Impressions</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--primary-light-1);"></div>Engagement</div>
+          </div>
+          <div style="position:relative;padding-left:40px;">
+            <div class="y-axis">
+              <span>50K</span>
+              <span>40K</span>
+              <span>30K</span>
+              <span>20K</span>
+              <span>10K</span>
+              <span>0</span>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-group"><div class="bar impressions" style="height:55%;"></div><div class="bar engagement" style="height:25%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:70%;"></div><div class="bar engagement" style="height:35%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:60%;"></div><div class="bar engagement" style="height:30%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:85%;"></div><div class="bar engagement" style="height:45%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:75%;"></div><div class="bar engagement" style="height:40%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:90%;"></div><div class="bar engagement" style="height:50%;"></div></div>
+              <div class="bar-group"><div class="bar impressions" style="height:100%;"></div><div class="bar engagement" style="height:55%;"></div></div>
+            </div>
+            <div class="bar-labels">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campaign Table -->
+        <div class="table-card">
+          <div class="table-header">Campaign Performance</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Platform</th>
+                <th>Status</th>
+                <th>Impressions</th>
+                <th>Clicks</th>
+                <th>CTR</th>
+                <th>AI Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:500;color:var(--heading-text);">Summer Serum Launch</td>
+                <td>Instagram</td>
+                <td><span class="status-active"><span class="status-dot green"></span>Active</span></td>
+                <td>89,432</td>
+                <td>4,291</td>
+                <td>4.8%</td>
+                <td><span style="background:#e8f8ef;color:var(--green);padding:2px 8px;border-radius:4px;font-weight:600;font-size:12px;">94</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500;color:var(--heading-text);">GRWM Reel #3</td>
+                <td>TikTok</td>
+                <td><span class="status-active"><span class="status-dot green"></span>Active</span></td>
+                <td>124,891</td>
+                <td>5,832</td>
+                <td>4.7%</td>
+                <td><span style="background:#e8f8ef;color:var(--green);padding:2px 8px;border-radius:4px;font-weight:600;font-size:12px;">91</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500;color:var(--heading-text);">LinkedIn Product Post</td>
+                <td>LinkedIn</td>
+                <td><span class="status-completed">Completed</span></td>
+                <td>23,102</td>
+                <td>982</td>
+                <td>4.3%</td>
+                <td><span style="background:#e8f8ef;color:var(--green);padding:2px 8px;border-radius:4px;font-weight:600;font-size:12px;">87</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500;color:var(--heading-text);">Before/After Campaign</td>
+                <td>Instagram</td>
+                <td><span class="status-scheduled"><span class="status-dot" style="background:var(--orange);"></span>Scheduled</span></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span style="background:#e8f8ef;color:var(--green);padding:2px 8px;border-radius:4px;font-weight:600;font-size:12px;">89</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- AI Insights -->
+        <div class="ai-insights-panel">
+          <div class="aip-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 2l1.09 3.26L16.36 6l-2.6 2.09.64 3.41L12 9.77 9.6 11.5l.64-3.41L7.64 6l3.27-.74z"/><path d="M5 20l1.09-3.26L3.5 14.65l3.27-.74L7.86 10.5 10 12.59"/></svg>
+            Weekly AI Report Card
+          </div>
+          <div class="insight-item">
+            <div class="insight-text">Your GRWM reels got 6.5% CTR -- 2.3x above your average. Generate 5 more this week for maximum reach.</div>
+            <button class="insight-btn">Create GRWM Variants</button>
+          </div>
+          <div class="insight-item">
+            <div class="insight-text">Engagement peaks on Tue & Thu at 6-8 PM. 3 posts are scheduled outside optimal times.</div>
+            <button class="insight-btn">Reschedule Posts</button>
+          </div>
+          <div class="insight-item">
+            <div class="insight-text">Close-up product shots outperform lifestyle images by 34% for your brand. Consider shifting your creative mix.</div>
+            <button class="insight-btn">Create Close-up Template</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end main-content -->
+</div><!-- end app-layout -->
+
+<script>
+// ===== STATE =====
+let currentView = 'generate';
+let currentStep = 1;
+let adFormat = 'image';
+
+// ===== VIEW SWITCHING =====
+function switchView(view) {
+  currentView = view;
+  // Update sidebar
+  document.querySelectorAll('.sidebar-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === view);
+  });
+  // Update content views
+  document.querySelectorAll('.content-view').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  // Update breadcrumb
+  const names = { brand: 'Brand Settings', generate: 'Generate Ad', analytics: 'Analytics' };
+  document.getElementById('breadcrumb-current').textContent = names[view] || '';
+  // Show/hide step nav
+  document.getElementById('step-nav').style.display = view === 'generate' ? 'flex' : 'none';
+}
+
+// ===== STEP NAVIGATION =====
+function goToStep(step) {
+  currentStep = step;
+  renderStep();
+}
+
+function nextStep() {
+  if (currentStep < 6) {
+    currentStep++;
+    renderStep();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) {
+    currentStep--;
+    renderStep();
+  }
+}
+
+function renderStep() {
+  // Update step circles
+  document.querySelectorAll('.step-circle').forEach(el => {
+    const s = parseInt(el.dataset.step);
+    el.classList.remove('active', 'completed');
+    el.innerHTML = s;
+    if (s === currentStep) {
+      el.classList.add('active');
+    } else if (s < currentStep) {
+      el.classList.add('completed');
+      el.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    }
+  });
+
+  // Update step labels
+  document.querySelectorAll('.step-label').forEach((el, i) => {
+    el.classList.remove('active', 'completed');
+    if (i + 1 === currentStep) el.classList.add('active');
+    else if (i + 1 < currentStep) el.classList.add('completed');
+  });
+
+  // Update connectors
+  for (let i = 1; i <= 5; i++) {
+    const conn = document.getElementById('conn-' + i + '-' + (i + 1));
+    if (conn) conn.classList.toggle('completed', i < currentStep);
+  }
+
+  // Show/hide step content
+  document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('step-' + currentStep).classList.add('active');
+
+  // Update nav buttons
+  document.getElementById('back-btn').style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+  const nextBtn = document.getElementById('next-btn');
+  const labels = {
+    1: 'Continue',
+    2: 'Continue with selection',
+    3: 'Review Plan',
+    4: 'Approve & Generate',
+    5: 'Publish Now',
+    6: 'Schedule Post'
+  };
+  nextBtn.innerHTML = labels[currentStep] + ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
+
+  // Update step 5 title
+  if (currentStep === 5) {
+    const isReady = !document.getElementById('gen-ready').classList.contains('hidden');
+    document.getElementById('step5-title').textContent = isReady ? 'Your Ad is Ready!' : 'Generating Your Ad';
+    document.getElementById('step5-subtitle').textContent = isReady ? 'Download, customize, or publish your generated creatives.' : 'Please wait while we create your ad creative.';
+  }
+
+  // Scroll main content to top
+  document.querySelector('.main-content').scrollTop = 0;
+}
+
+// ===== FORMAT SELECTOR =====
+function selectFormat(format) {
+  adFormat = format;
+  document.getElementById('format-image').classList.toggle('active', format === 'image');
+  document.getElementById('format-video').classList.toggle('active', format === 'video');
+  document.getElementById('format-image').querySelector('svg').setAttribute('stroke', format === 'image' ? 'var(--primary)' : 'currentColor');
+  document.getElementById('format-video').querySelector('svg').setAttribute('stroke', format === 'video' ? 'var(--primary)' : 'currentColor');
+  document.getElementById('duration-field').classList.toggle('hidden', format !== 'video');
+  document.getElementById('video-options').classList.toggle('hidden', format !== 'video');
+  document.getElementById('sum-format').textContent = format === 'image' ? 'Image Ad' : 'Video Ad';
+}
+
+// ===== PILL TOGGLE =====
+function togglePill(el) {
+  el.classList.toggle('active');
+  updateSummary();
+}
+
+// ===== DISCOVER CARD TOGGLE =====
+function toggleDiscoverCard(card) {
+  card.classList.toggle('selected');
+  const checkBox = card.querySelector('.check-box');
+  if (card.classList.contains('selected')) {
+    checkBox.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+  } else {
+    checkBox.innerHTML = '';
+  }
+  const count = document.querySelectorAll('.discover-card.selected').length;
+  document.getElementById('discover-count').textContent = count;
+}
+
+// ===== FILTER DISCOVER =====
+function filterDiscover(el) {
+  el.parentElement.querySelectorAll('.pill-tag').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ===== RADIO CARD =====
+function selectRadio(el) {
+  el.parentElement.querySelectorAll('.radio-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ===== VIDEO CONCEPT =====
+function selectVideoConcept(el) {
+  document.querySelectorAll('.video-concept-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ===== PLAN VIEW TOGGLE =====
+function switchPlanView(type, btn) {
+  document.querySelectorAll('.plan-toggle .plan-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('plan-image-view').classList.toggle('hidden', type !== 'image');
+  document.getElementById('plan-video-view').classList.toggle('hidden', type !== 'video');
+}
+
+// ===== GENERATE STATE TOGGLE =====
+function switchGenState(state, btn) {
+  document.querySelectorAll('.gen-state-toggle .plan-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('gen-generating').classList.toggle('hidden', state !== 'generating');
+  document.getElementById('gen-ready').classList.toggle('hidden', state !== 'ready');
+  document.getElementById('step5-title').textContent = state === 'ready' ? 'Your Ad is Ready!' : 'Generating Your Ad';
+  document.getElementById('step5-subtitle').textContent = state === 'ready' ? 'Download, customize, or publish your generated creatives.' : 'Please wait while we create your ad creative.';
+}
+
+// ===== COPY TAB =====
+function switchCopyTab(btn, platform) {
+  btn.parentElement.querySelectorAll('.copy-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const copies = {
+    instagram: 'Your skin deserves better than guesswork. ✨\n\nIntroducing our Organic Face Serum - clinically proven to transform your skin in just 14 days. Packed with retinol and natural botanicals for that overnight glow. ❤️\n\n🌿 100% Organic | ✅ Dermatologist Tested | 💪 Visible Results in 2 Weeks\n\nTap the link in bio to shop now! Use code GLOW20 for 20% off.\n\n#skincare #organicbeauty #glowup #serumaddict #antiaging #naturalbeauty',
+    linkedin: 'After 2 years of R&D, we\'re proud to launch our Organic Face Serum.\n\nThe skincare industry is valued at $189B, yet 73% of consumers struggle to find products that actually work. Our dermatologist-tested formula uses clinically-proven retinol concentrations to deliver visible results in 14 days.\n\nKey differentiators:\n→ 100% organic ingredients\n→ Backed by 3 clinical trials\n→ 4.8★ rating from 2,400+ users\n\nLearn more at glowskinco.com\n\n#SkincareInnovation #BeautyTech #DTC',
+    x: 'Your 14-day glow-up starts now ✨\n\nOur new Organic Face Serum is clinically proven to transform your skin. 100% organic. Dermatologist tested. Real results.\n\nShop now → glowskinco.com\n\n#skincare #glowup',
+    tiktok: 'POV: You finally found THE serum 😍\n\nDay 1 vs Day 14 results are INSANE 🤯\n\nOrganic Face Serum is clinically proven and 100% natural. Link in bio for 20% off with code GLOW20!\n\n#skincaretiktok #glowup #serumreview #beforeafter #skintok'
+  };
+  document.getElementById('copy-text').innerText = copies[platform] || copies.instagram;
+}
+
+// ===== PREVIEW UPDATE =====
+function updatePreview() {
+  document.getElementById('preview-headline').textContent = document.getElementById('headline-input').value;
+  document.getElementById('preview-tagline').textContent = document.getElementById('tagline-input').value;
+  document.getElementById('preview-cta').textContent = document.getElementById('cta-select').value;
+  document.getElementById('headline-count').textContent = document.getElementById('headline-input').value.length;
+  document.getElementById('tagline-count').textContent = document.getElementById('tagline-input').value.length;
+}
+
+// ===== SUMMARY UPDATE =====
+function updateSummary() {
+  document.getElementById('sum-objective').textContent = document.getElementById('objective-select').value;
+  document.getElementById('sum-industry').textContent = document.getElementById('industry-select').value;
+  const platforms = [];
+  document.querySelectorAll('#platform-pills .pill-tag.active').forEach(p => platforms.push(p.textContent));
+  document.getElementById('sum-platforms').textContent = platforms.join(', ') || 'None selected';
+}
+
+// ===== SCHEDULE TOGGLE =====
+function toggleSchedule(btn, mode) {
+  document.querySelectorAll('.schedule-toggle .plan-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('schedule-fields').style.display = mode === 'later' ? 'block' : 'none';
+}
+
+// ===== PREVIEW TAB =====
+function switchPreviewTab(btn) {
+  btn.parentElement.querySelectorAll('.copy-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  renderStep();
+  updatePreview();
+});
+</script>
+</body>
+</html>
